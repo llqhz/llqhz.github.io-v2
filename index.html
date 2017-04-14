@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" >
+    <!-- 响应式布局视图端口设置：宽度等于设备宽度，初始化比例=1 代表100%完全显示-->
+    <title>个人主页</title>
+      <!-- 引入 Bootstrap -->
+      <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ 
+      <!-- HTML5 Shim 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+      <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+      <!--[if lt IE 9]>
+         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+
+    <style type="text/css" media="screen">
+        *{  /* 调试模式 */
+            /*border: 1px solid red;*/
+        }
+        body{
+            /* nav导航条的z-index不与body在一起，故body需留padding */
+            padding-top:70px;/* 导航条占据的宽度 */
+        }
+    </style>
+</head>
+<!-- container表示自动缩小宽度居中 -->
+<body class="container">
+
+<header id="header" class="">
+    <!-- navbar导航(链接li)条，inverse颜色翻转（导航条变黑）
+    fixed—top调整位置到顶部 fixed表示转为绝对位置-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header"><!-- 导航条头部区域 -->
+                <div class="navbar-brand"><!-- 大标题 -->
+                    <span class="glyphicon glyphicon-home"></span>
+                    个人主页
+                </div>
+                <div class="navbar-brand"><!-- 大标题 -->
+                    <a href="#" title="">☆筱 怪☆</a>
+                </div>
+
+                <!-- 屏幕缩小后导航小按钮可展开 -->
+                <!-- navbar-toggle可展开的导航按钮样式
+                    data-toggle 点击触发事件   collapsw交替展开(可以展开的)
+                    data-target:指向展开的divID
+                    title:提示信息alt
+                -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#divTarget">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button><!-- 导航右边小屏幕按钮 -->
+            </div><!-- 导航条头部结束 -->
+
+            <!-- id=divTarget支持被弹出 -->
+            <!-- 所有导航条按钮 -->
+            <div id="divTarget" class="collapse navbar-collapse">
+
+                <ul class="nav navbar-nav navbar-left text-center">
+                    <li class="active"><a href="#" title="基本信息">基本信息</a></li>
+                    <li><a href="#" title="工作经验">工作经验</a></li>
+                    <li><a href="#" title="学习总结">学习总结</a></li>
+                    <li><a href="music.html" title="音乐推荐">音乐推荐</a></li>
+                    <li><a href="#" title="诗文分享">诗文分享</a></li>
+                    <li><a href="#" title="资源收藏">资源收藏</a></li>
+                </ul>
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- 打印按钮及后附modal弹出框 -->
+                    <li>
+                        <!-- 打印按钮 -->
+                        <!-- data-toggle触发事件类型 data-target目标 data-dismiss结束事件类型 -->
+                        <button type="button" class="btn btn-success navbar-btn" title="打印" data-toggle="modal" data-target="#modalTarget">
+                            打印
+                        </button>
+
+                        <!-- id=modalTarget支持被弹出
+                        data-toggle激活事件类型 data-dissmiss关闭事件类型
+                        modal弹出样式 fade淡入淡出-->
+                        <div class="modal fade" id="modalTarget">
+                            <div class="modal-dialog"><!-- 对话框 -->
+                                <div class="modal-content"><!-- modal内容 -->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span>&times;</span>
+                                        </button>
+                                        <h4>打印此页</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        打印预览，打印配置
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            关闭
+                                        </button>
+                                        <button type="button" class="btn btn-primary">打印</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- modal弹出框结束 -->
+
+                        <!-- 类似alt的文本提示框 -->
+                        <button type="button" class="btn btn-info navbar-btn" data-toggle="tooltip" data-placement="bottom" title="下载">下载</button>
+                        <script type="text/javascript">
+                            $(function(){
+                                $('[data-toggle="tooltip"]').tooltip();
+                            });
+                        </script>
+                    </li>
+                    <!-- 每个li在大屏幕时没有区别，小屏幕时，不同li会分层展开 -->
+                </ul>
+            </div><!-- 导航条按钮结束 -->
+        </div>
+    </nav>
+</header><!-- /header -->
+
+<!-- 主题部分 栅格化布局 row为行 col为列-->
+<div class="row"><!-- 一行 -->
+
+    <div class="col-sm-9 pull-right"><!-- 右侧 -->
+
+        <div remove="sm" class="jumbotron">
+            <!--开始设置轮播div-->
+            <!--carousel:轮播 slide：滑动  data-ride:date类型为carous轮播  -->
+            <div class="carousel slide" data-ride="carousel" id="carouselID">
+                <!--图片轮播的下面若干原点 indicators：指示-->
+                <ol class="carousel-indicators">
+                    <!-- data-darget 点击li按钮触发id=carouselID的事件(data-ride)
+                    data-slide-to跳转到第几幅图片
+                    active激活状态 -->
+                    <li data-target="#carouselID" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselID" data-slide-to="1"></li>
+                    <li data-target="#carouselID" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="item active"><!-- item图1 -->
+                        <img src="images/a.jpg" alt="图片失效" class="img-responsive img-rounded">
+                        <div class="carousel-caption">
+                            图片描述信息
+                        </div>
+                    </div>
+
+
+                    <div class="item"><!-- item图1 -->
+                        <img src="images/b.jpg" alt="图片失效" class="img-responsive img-rounded">
+                        <div class="carousel-caption">
+                            图片描述信息
+                        </div>
+                    </div>
+
+                    <div class="item"><!-- item图1 -->
+                        <img src="images/c.jpg" alt="图片失效" class="img-responsive img-rounded">
+                        <div class="carousel-caption">
+                            图片描述信息
+                        </div>
+                    </div>
+
+                    <!-- 左箭头链接 -->
+                    <a href="#carouselID" class="left carousel-control" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left">
+                            <!-- 左箭头图标 -->
+                        </span>
+                    </a>
+
+                    <!-- 右箭头链接 -->
+                    <a href="#carouselID" class="right carousel-control" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right">
+                            <!-- 右箭头图标 -->
+                        </span>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="panel-group" id="panel-group-1"><!-- panel组 -->
+            <div class="panel panel-default"><!-- panel-1 -->
+                <div class="panel-heading"><!-- panel-1-头部 -->
+                    <div class="panel-title"><!-- panel-1-头部-标题 -->
+                        <a href="#collapse-1" data-toggle="collapse" data-parent="#panel-group-1" title="">工作经验（work experience）</a>
+                    </div>
+                </div>
+                <div id="collapse-1" class="panel-collapse collapse"><!-- 可展开收缩的面板 -->
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <!-- list-group里面的某项item -->
+                            <li class="list-group-item list-group-item-success">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        2008-08——至今
+                                    </div>
+                                    <div class="col-sm-4">
+                                        xxx 公司
+                                    </div>
+                                    <div class="col-sm-4">
+                                        软件工程师
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- list-group里面的某项item -->
+                            <li class="list-group-item list-group-item-info">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        2008-08——至今
+                                    </div>
+                                    <div class="col-sm-4">
+                                        xxx 公司
+                                    </div>
+                                    <div class="col-sm-4">
+                                        软件工程师
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- list-group里面的某项item -->
+                            <li class="list-group-item list-group-item-warning">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        2008-08——至今
+                                    </div>
+                                    <div class="col-sm-4">
+                                        xxx 公司
+                                    </div>
+                                    <div class="col-sm-4">
+                                        软件工程师
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default"><!-- panel-2 -->
+                <div class="panel-heading"><!-- panel-1-头部 -->
+                    <div class="panel-title"><!-- panel-1-头部-标题 -->
+                        <a href="#collapse-2" data-toggle="collapse" data-parent="#panel-group-1" title="">教育经历（education）</a>
+                    </div>
+                </div>
+                <div id="collapse-2" class="panel-collapse collapse"><!-- 可展开收缩的面板 -->
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <!-- list-group里面的某项item -->
+                            <li class="list-group-item list-group-item-success">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        2008-08——至今
+                                    </div>
+                                    <div class="col-sm-4">
+                                        xxx 公司
+                                    </div>
+                                    <div class="col-sm-4">
+                                        软件工程师
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- list-group里面的某项item -->
+                            <li class="list-group-item list-group-item-info">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        2008-08——至今
+                                    </div>
+                                    <div class="col-sm-4">
+                                        xxx 公司
+                                    </div>
+                                    <div class="col-sm-4">
+                                        软件工程师
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- list-group里面的某项item -->
+                            <li class="list-group-item list-group-item-warning">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        2008-08——至今
+                                    </div>
+                                    <div class="col-sm-4">
+                                        xxx 公司
+                                    </div>
+                                    <div class="col-sm-4">
+                                        软件工程师
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default"><!-- panel-3 -->
+                <div class="panel-heading"><!-- panel-3-头部 -->
+                    <div class="panel-title"><!-- panel-3-头部-标题 -->
+                        <a href="#collapse-3" data-toggle="collapse" data-parent="#panel-group-1" title="">学习总结（summary）</a>
+                    </div>
+                </div>
+                <div id="collapse-3" class="panel-collapse collapse"><!-- 可展开收缩的面板 -->
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <!-- list-group里面的某项item -->
+                            <li class="list-group-item list-group-item-success">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        2008-08——至今
+                                    </div>
+                                    <div class="col-sm-4">
+                                        xxx 公司
+                                    </div>
+                                    <div class="col-sm-4">
+                                        软件工程师
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- list-group里面的某项item -->
+                            <li class="list-group-item list-group-item-info">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        2008-08——至今
+                                    </div>
+                                    <div class="col-sm-4">
+                                        xxx 公司
+                                    </div>
+                                    <div class="col-sm-4">
+                                        软件工程师
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- list-group里面的某项item -->
+                            <li class="list-group-item list-group-item-warning">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        2008-08——至今
+                                    </div>
+                                    <div class="col-sm-4">
+                                        xxx 公司
+                                    </div>
+                                    <div class="col-sm-4">
+                                        软件工程师
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default"><!-- panel-4 -->
+                <div class="panel-heading"><!-- panel-4-头部 -->
+                    <div class="panel-title"><!-- panel-4-头部-标题 -->
+                        <a href="#collapse-4" data-toggle="collapse" data-parent="#panel-group-1" title="">项目展示（project）</a>
+                    </div>
+                </div>
+                <div id="collapse-4" class="panel-collapse collapse in"><!--data-target展示出-->
+                    <div class="panel-body"><!-- 展示出panel-body-->
+                        <div class="jumbotron"><!-- 巨幕 -->
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="text-left text-success">
+                                            为天地立心，
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="text-left text-success">
+                                            为生民立命，
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="text-left text-success">
+                                            为往圣继绝学，
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="text-left text-success">
+                                            为万世开太平。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--
+                            <p class="text-left text-success">
+                                <label>&nbsp;&nbsp;&nbsp;为天地立心，&nbsp;</label>
+                                <label>&nbsp;&nbsp;&nbsp;为生民立命；&nbsp;</label>
+                            </p>
+                            <p class="text-left text-success">
+                                <label>为往圣继绝学，</label>
+                                <label>为万世开太平。</label>
+                            </p>
+                             -->
+                            <p class="text-left text-success small"> </p>
+                            <p class="text-right">
+                                <a href="#" title="横渠四句">——横渠四句</a>
+                            <p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div remove="sm" class="col-sm-3 pull-left"><!-- 左侧 -->
+        <div class="panel panel-default"><!-- 个人信息 -->
+            <div class="panel-heading">
+                个人信息
+            </div>
+            <div class="panel-body">
+                <!-- img-responsive响应式图片
+                img-rounded图片圆角 img-thumbnail图片加相册-->
+                <img src="images/logo.jpg" class="img-responsive img-rounded img-thumbnail" alt="☆筱 怪☆" title="☆筱 怪☆"/>
+                <p class="text-center text-primary">☆筱 怪☆</p>
+                <address>
+                    <span class="glyphicon glyphicon-link">
+                        <strong>llqhz.cn</strong>
+                    </span>
+                    <br>
+                    <span class="glyphicon glyphicon-home" title="Address">
+                        <code>湖北省武汉市江夏区</code>
+                    </span>
+                    <br>
+                    <span class="glyphicon glyphicon-file" title="PostCode">
+                        <kbd>100011</kbd>
+                    </span>
+                    <br>
+                    <span class="glyphicon glyphicon-phone text-info" title="PhoneNum">
+                        13210001000
+                    </span>
+                    <br>
+                    <span class="glyphicon glyphicon-envelope" title="Email">
+                        605382289@qq.com
+                    </span>
+                </address>
+            </div>
+        </div>
+        <div class="panel panel-info"><!-- 个人技能 -->
+            <div class="panel-heading">
+                个人技能
+            </div>
+            <div class="panel-body">
+                <div class="row"><!-- HTML5进度条一行 -->
+                    <div class="col-sm-3"><!-- 左侧 -->
+                        <!-- text-muted表示字体 -->
+                        <span class="text-muted" >HTML5</span>
+                    </div>
+                    <div class="col-sm-9"><!-- 右侧 -->
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" style="width:85%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row"><!-- .NET进度条一行 -->
+                    <div class="col-sm-3"><!-- 左侧 -->
+                        <!-- text-success表示字体 -->
+                        <span class="text-success" >.NET</span>
+                    </div>
+                    <div class="col-sm-9"><!-- 右侧 -->
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-success active" style="width:90%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row"><!-- CSS3进度条一行 -->
+                    <div class="col-sm-3"><!-- 左侧 -->
+                        <!-- text-info表示字体 -->
+                        <span class="text-info" >CSS3</span>
+                    </div>
+                    <div class="col-sm-9"><!-- 右侧 -->
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-info active" style="width:85%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row"><!-- JQuery进度条一行 -->
+                    <div class="col-sm-3"><!-- 左侧 -->
+                        <!-- text-info表示字体 -->
+                        <span class="text-warning" >JQuery</span>
+                    </div>
+                    <div class="col-sm-9"><!-- 右侧 -->
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-warning active" style="width:80%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row"><!-- Java进度条一行 -->
+                    <div class="col-sm-3"><!-- 左侧 -->
+                        <!-- text-info表示字体 -->
+                        <span class="text-danger" >Java</span>
+                    </div>
+                    <div class="col-sm-9"><!-- 右侧 -->
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" style="width:65%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel panel-primary"><!-- 联系方式 -->
+            <div class="panel-heading">
+                联系方式
+            </div>
+            <div class="panel-body">
+                <!-- 水平表单horizontal -->
+                <form class="form-horizontal" action="" method="get" accept-charset="utf-8">
+                    <div class="form-group"><!-- 表格一行 -->
+                        <!-- label为for语义化表单 for与labelID一致 -->
+                        <label for="email" class="col-sm-2 control-label">
+                            email
+                        </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="emial" id="email" placeholder="Email" />
+                        </div>
+                    </div>
+                    <div class="form-group"><!-- 表格一行 -->
+                        <!-- label为for语义化表单 for与labelID一致 for id  文本 提示一致-->
+                        <label for="name" class="col-sm-2 control-label">
+                            name
+                        </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" id="name" placeholder="name" />
+                        </div>
+
+                    </div>
+
+                    <div class="form-group"><!-- 表格一行 -->
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-primary pull-right">
+                                提交
+                            </button>
+                            <div class="clearfix">
+                                <!-- 清除pull-right浮动 -->
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <nav class="navbar-default navbar-fixed-bottom text-center">
+        All images and contents &copy  www.llqhz.cn
+    </nav>
+</footer>
+</body>
+<!--
+    <script src="script/adapte.js"></script>
+    <script type="text/javascript">
+        $(window).resize(function() {
+          removeElement();
+        });
+    </script>
+ -->
+</html>
