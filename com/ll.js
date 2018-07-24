@@ -1,7 +1,7 @@
 /*
 * @description ll类库封装
 * @Author: llqhz@qq.com
-* @Last Modified time: 2018-07-24 11:09:50
+* @Last Modified time: 2018-07-24 11:11:26
 * @responsity git@github.com:llqhz/llqhz.github.io.git
 * @require JQuery layer
 * @version 1.0.0 bata
