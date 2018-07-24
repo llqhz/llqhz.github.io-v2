@@ -1,7 +1,7 @@
 /*
 * @description ll类库封装
 * @Author: llqhz@qq.com
-* @Last Modified time: 2018-07-24 10:56:26
+* @Last Modified time: 2018-07-24 11:09:50
 * @responsity git@github.com:llqhz/llqhz.github.io.git
 * @require JQuery layer
 * @version 1.0.0 bata
@@ -15,14 +15,14 @@ var ll = {
   /**
    * 封装ajax函数
    * @param  {object} opt ajax参数
-   * @param  loading = [false,true,1,2] 使用layer loading加载框 默认 true
+   * @param  loading = [false,true,1,2] 使用layer loading加载框 默认 false
    * @param  handle => fun   处理ajax回调
    * @param  success/error => fun   处理ajax.code=0/1 的回调
    * @param  handle => fun   处理ajax回调
    */
   ajax: function(opt){
       if ( typeof opt.url == 'undefined' ) { console.log("ajax url not found ..."); return;  };
-      if ( opt.loading !== false ) {
+      if ( opt.loading ) {
           var layerIndex = layer.load(opt.loading);
       };
       var req = { url: opt.url };
@@ -36,6 +36,7 @@ var ll = {
       };
       req.error = function(res){ layer.close(layerIndex);console.log("ajax error : ....."); console.log(res);};
       req.success = function(res){
+            console.log('layerIndex: ',layerIndex);
             if ( opt.loading )
                 layer.close(layerIndex);
             if ( typeof opt.handle=='function' ) {
