@@ -2,7 +2,7 @@
 * @Description ll Web类库封装
 * @Author: llqhz@qq.com
 * @Created time: 2018-07-24 11:27:11
-* @Last Modified time: 2018-07-24 13:24:19
+* @Last Modified time: 2018-07-24 14:03:29
 * @responsity git@github.com:llqhz/llqhz.github.io.git
 * @require JQuery layer
 * @version 1.0.0 bata
@@ -17,7 +17,7 @@ var ll = {
     * 封装ajax函数
     * @param  {object} opt ajax参数
     * @param  loading = [false,true,1,2] 使用layer loading加载框 默认 false
-    * @param  handle => fun   处理ajax回调
+    * @param  handle => fun   处理ajax回调 tips: 用switch()处理res.code
     * @param  success/error => fun   处理ajax.code=0/1 的回调
     * @param  handle => fun   处理ajax回调
     */
