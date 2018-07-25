@@ -2,7 +2,7 @@
 * @Description ll Web类库封装
 * @Author: llqhz@qq.com
 * @Created time: 2018-07-24 11:27:11
-* @Last Modified time: 2018-07-25 18:18:50
+* @Last Modified time: 2018-07-25 18:19:35
 * @responsity git@github.com:llqhz/llqhz.github.io.git
 * @useage: <script type="text/javascript" src="https://llqhz.github.io/com/ll.js"></script>
 * @require JQuery layer
