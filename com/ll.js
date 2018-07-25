@@ -2,7 +2,7 @@
 * @Description ll Web类库封装
 * @Author: llqhz@qq.com
 * @Created time: 2018-07-24 11:27:11
-* @Last Modified time: 2018-07-24 14:03:29
+* @Last Modified time: 2018-07-25 18:16:16
 * @responsity git@github.com:llqhz/llqhz.github.io.git
 * @require JQuery layer
 * @version 1.0.0 bata
@@ -183,7 +183,22 @@ var ll = {
             };
         });
         return msg;
-    }
+    },
+    // 元素全屏
+    fullScreen: function (el) {
+      if ( el ) {
+        var element = $(el)[0];
+      } else {
+        var element = $('html')[0];
+      }
+      if(element.requestFullScreen) {
+        element.requestFullScreen();
+       } else if(element.webkitRequestFullScreen ) {
+         element.webkitRequestFullScreen();
+        } else if(element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+       }
+     }
 };
 // 设置ll命名空间
 window.ll ? window.ll=ll: true;
