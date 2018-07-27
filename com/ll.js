@@ -2,7 +2,7 @@
 * @Description ll Web类库封装
 * @Author: llqhz@qq.com
 * @Created time: 2018-07-24 11:27:11
-* @Last Modified time: 2018-07-26 19:17:49
+* @Last Modified time: 2018-07-27 18:30:51
 * @responsity git@github.com:llqhz/llqhz.github.io.git
 * @useage: <script type="text/javascript" src="https://llqhz.github.io/com/ll.js"></script>
 * @require JQuery layer
@@ -187,19 +187,65 @@ var ll = {
     },
     // 元素全屏
     fullScreen: function (el) {
-      if ( el ) {
-        var element = $(el)[0];
-      } else {
-        var element = $('html')[0];
-      }
-      if(element.requestFullScreen) {
-        element.requestFullScreen();
-       } else if(element.webkitRequestFullScreen ) {
-         element.webkitRequestFullScreen();
+        if ( el ) {
+            var element = $(el)[0];
+        } else {
+            var element = $('html')[0];
+        }
+        if( element.requestFullScreen) {
+            element.requestFullScreen();
+        } else if(element.webkitRequestFullScreen ) {
+            element.webkitRequestFullScreen();
         } else if(element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
-       }
-     }
+            element.mozRequestFullScreen();
+        }
+     },
+     init: function(){
+        /**
+         * layer.蓝色tooltipss
+         * usage: (1).layer-tooltips class  (2) tips="内容"
+         */
+        $('.layer-tooltips').hover(function() {
+            /* Stuff to do when the mouse enters the element */
+            var tipId = parseInt(Math.random()*Math.pow(10,10));
+            $(this).attr('tipId',tipId);
+            layer.tipId = layer.tips($(this).attr('tip'),'.layer-tooltips[tipId='+tipId+']',{
+              tips: [1, '#3595CC'],
+              skin: 'll-tips',
+              time: 100000
+            });
+        }, function() {
+            layer.close(layer.tipId);
+            /* Stuff to do when the mouse leaves the element */
+        });
+
+        /**
+         * layer.图片预览
+         * usage: (1).layer-pic-pre class
+         */
+        $(".layer-pic-pre").on('click', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            var url = this.src;
+            var index = layer.open({
+                type: 1,
+                content:'<div class="text-center "><img src="'+ url +'" class="img-responsive center-block"></div>',
+                //area: ['320px', '195px'],
+                maxmin: true
+            });
+            layer.full(index); // 全屏
+        });
+
+        /**
+         * icheckInit
+         * usage: input.flat
+         */
+        $('input.flat').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+
+     },
 };
 // 设置ll命名空间
 window.ll ? window.ll=ll: true;
