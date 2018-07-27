@@ -2,7 +2,7 @@
 * @Description ll Web类库封装
 * @Author: llqhz@qq.com
 * @Created time: 2018-07-24 11:27:11
-* @Last Modified time: 2018-07-27 18:30:51
+* @Last Modified time: 2018-07-27 19:30:16
 * @responsity git@github.com:llqhz/llqhz.github.io.git
 * @useage: <script type="text/javascript" src="https://llqhz.github.io/com/ll.js"></script>
 * @require JQuery layer
@@ -200,7 +200,32 @@ var ll = {
             element.mozRequestFullScreen();
         }
      },
+    /**
+     * layerHTML 表单弹窗
+     * @param  {string} html 需要展示的数据
+     */
+    layerHTML: function(html){
+        var index = layer.open({
+            type: 1,
+            content: html,
+            area: '80%',
+            skin: 'layer-preview-class',
+            offset: ['50px','1%'], // 顶部间距
+        });
+        layer.style(index, {
+            maxWidth: '600px',
+        });
+        var width =  $(".layer-preview-class").width();
+        var win_width = $(window).width();
+        var left = (win_width-width)/2;
+            layer.style(index, {
+            left: left+'px',
+        });
+    },
      init: function(){
+        init_sidebar();
+
+
         /**
          * layer.蓝色tooltipss
          * usage: (1).layer-tooltips class  (2) tips="内容"
@@ -245,7 +270,18 @@ var ll = {
             radioClass: 'iradio_flat-green'
         });
 
+        /**
+         * layer-close-btn 关闭最新弹窗
+         * usage: .layer-close-btn
+         */
+        $('html').on('click', '[layer-close-btn]', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            layer.close(layer.index);
+        });
+
      },
+
 };
 // 设置ll命名空间
 window.ll ? window.ll=ll: true;
